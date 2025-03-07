@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate the probability of your school opening based on real-time weather data. Enter your city or postal code, select your school type, and choose a date to find out!">
+  <meta name="keywords" content="school opening probability, snow day calculator, winter weather, school closure">
+  <meta name="author" content="School Opening Probability Calculator">
+  <title>School Opening Probability Calculator</title>
+  <!-- AMP Auto Ads Script -->
+  <script async custom-element="amp-auto-ads"
+          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+  </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5774733323555357" crossorigin="anonymous"></script>
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "School Opening Probability Calculator",
+    "description": "A tool to calculate the probability of your school opening based on real-time weather data.",
+    "applicationCategory": "Weather",
+    "operatingSystem": "Web",
+    "url": "https://www.yourwebsite.com",
+    "screenshot": "https://www.yourwebsite.com/screenshot.png"
+  }
+  </script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #87CEEB, #E0F6FF);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+      margin: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #1E3A8A;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #1E3A8A;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0F2C6B;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .ad {
+      margin-top: 30px;
+    }
+
+    .instructions {
+      margin-top: 30px;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .instructions h2 {
+      font-size: 1.5rem;
+      color: #1E3A8A;
+      margin-bottom: 10px;
+    }
+
+    .instructions ol {
+      padding-left: 20px;
+    }
+
+    .instructions li {
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .progress-bar-fill {
+      height: 20px;
+      background-color: #1E3A8A;
+      width: 0;
+      border-radius: 10px;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .weather-details {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .weather-details p {
+      margin: 5px 0;
+    }
+
+    /* Mobile-specific styles */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+      input, select {
+        width: 90%;
+      }
+
+      button {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- AMP Auto Ads -->
+  <amp-auto-ads type="adsense"
+                data-ad-client="ca-pub-5774733323555357">
+  </amp-auto-ads>
+
+  <div class="container">
+    <h1>School Opening Probability Calculator</h1>
+    <p>Enter your city name or postal code, select your school type, and choose a date to check the probability of your school opening!</p>
+    <input type="text" id="locationInput" placeholder="City or Postal Code">
+    <select id="schoolType">
+      <option value="elementary">Elementary School</option>
+      <option value="highschool">High School</option>
+      <option value="college">College/University</option>
+    </select>
+    <input type="date" id="datePicker" min="">
+    <button id="calculateBtn">Calculate</button>
+    <div id="result"></div>
+    <!-- Google AdSense Ad Unit -->
+    <div class="ad">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5774733323555357"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+    <!-- How to Use Instructions -->
+    <div class="instructions">
+      <h2>How to Use:</h2>
+      <ol>
+        <li><strong>Enter a city name or postal code</strong> in the input field.</li>
+        <li><strong>Select the type of school</strong> from the dropdown menu.</li>
+        <li><strong>Choose a date</strong> using the date picker.</li>
+        <li><strong>Click Calculate</strong> to see the probability of the school opening on the selected date.</li>
+      </ol>
+    </div>
+  </div>
+  <script>
+    const API_URL = "https://api.open-meteo.com/v1/forecast";
+
+    // Debugging: Log a message to confirm script is running
+    console.log("Script loaded successfully!");
+
+    // Set the minimum date for the date picker to today
+    const datePicker = document.getElementById("datePicker");
+    const today = new Date().toISOString().split("T")[0];
+    datePicker.setAttribute("min", today);
+
+    document.getElementById("calculateBtn").addEventListener("click", async () => {
+      const location = document.getElementById("locationInput").value.trim();
+      const schoolType = document.getElementById("schoolType").value;
+      const selectedDate = datePicker.value;
+
+      if (!location) {
+        alert("Please enter a city name or postal code.");
+        return;
+      }
+      if (!selectedDate) {
+        alert("Please select a date.");
+        return;
+      }
+
+      try {
+        // Debugging: Log the input values
+        console.log("Location:", location);
+        console.log("School Type:", schoolType);
+        console.log("Selected Date:", selectedDate);
+
+        // Fetch latitude and longitude using Open-Meteo's geocoding API
+        const geoResponse = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${location}&count=1`);
+        const geoData = await geoResponse.json();
+        if (!geoData.results || geoData.results.length === 0) {
+          throw new Error("Location not found.");
+        }
+
+        const { latitude, longitude, name: cityName } = geoData.results[0];
+
+        // Debugging: Log the fetched location data
+        console.log("City Name:", cityName);
+        console.log("Latitude:", latitude);
+        console.log("Longitude:", longitude);
+
+        // Fetch weather data for the selected date
+        const weatherResponse = await fetch(`${API_URL}?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation_probability,snowfall,windspeed_10m&start_date=${selectedDate}&end_date=${selectedDate}`);
+        const weatherData = await weatherResponse.json();
+
+        // Debugging: Log the fetched weather data
+        console.log("Weather Data:", weatherData);
+
+        // Calculate averages
+        const temperature = (weatherData.hourly.temperature_2m.reduce((sum, val) => sum + val, 0) / 24).toFixed(1); // Average temperature in °C
+        const precipitation = (weatherData.hourly.precipitation_probability.reduce((sum, val) => sum + val, 0) / 24).toFixed(0); // Average precipitation probability
+        const snowfall = (weatherData.hourly.snowfall.reduce((sum, val) => sum + val, 0) / 24).toFixed(1); // Average snowfall in inches
+        const windSpeed = (weatherData.hourly.windspeed_10m.reduce((sum, val) => sum + val, 0) / 24).toFixed(1); // Average wind speed in km/h
+
+        // Debugging: Log the calculated averages
+        console.log("Average Temperature:", temperature);
+        console.log("Chances of Rain:", precipitation);
+        console.log("Chances of Snow:", snowfall);
+        console.log("Wind Speed:", windSpeed);
+
+        // Calculate school opening probability
+        let probability = 100; // Base probability
+
+        if (schoolType === "elementary") {
+          if (snowfall > 2) probability -= 40;
+          if (temperature < -5) probability -= 30;
+          if (precipitation > 60) probability -= 20;
+        } else if (schoolType === "highschool") {
+          if (snowfall > 3) probability -= 30;
+          if (temperature < -10) probability -= 20;
+          if (precipitation > 70) probability -= 15;
+        } else if (schoolType === "college") {
+          if (snowfall > 4) probability -= 20;
+          if (temperature < -15) probability -= 10;
+          if (precipitation > 80) probability -= 10;
+        }
+
+        probability = Math.max(0, Math.min(probability, 100)); // Ensure probability is between 0% and 100%
+
+        // Debugging: Log the calculated probability
+        console.log("School Opening Probability:", probability);
+
+        // Display result
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `
+          <h2>Results for ${cityName}</h2>
+          <div class="weather-details">
+            <p><strong>Average Temperature:</strong> ${temperature}°C</p>
+            <p><strong>Chances of Rain:</strong> ${precipitation}%</p>
+            <p><strong>Chances of Snow:</strong> ${snowfall > 0 ? `${snowfall} inches` : "No snow"}</p>
+            <p><strong>Wind Speed:</strong> ${windSpeed} km/h</p>
+          </div>
+          <p><strong>School Opening Probability:</strong></p>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: ${probability}%"></div>
+          </div>
+          <p>${probability > 50 ? "School is likely to open!" : "School is likely to be closed."}</p>
+        `;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        document.getElementById("result").innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
